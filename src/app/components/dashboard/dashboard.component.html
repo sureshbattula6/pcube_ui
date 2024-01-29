@@ -1,0 +1,11 @@
+<div [ngSwitch]="userRoleId">
+  <div *ngSwitchCase="0">
+    <app-dashboard-admin></app-dashboard-admin>
+  </div>
+  <div *ngSwitchCase="10">
+    <app-tailors-dashboard></app-tailors-dashboard>
+  </div>
+  <div *ngSwitchDefault>
+    <app-dashboard-default></app-dashboard-default>
+  </div>
+</div>

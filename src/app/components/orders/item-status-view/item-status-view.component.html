@@ -1,0 +1,35 @@
+<div class="modal-content">
+  <div class="modal-header">
+      <h3 class="modal-title">Order Item Status</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      <!-- <div class="footer-block text-center" >
+        <button type="button" class="btn btn-danger" (click)="close()">Close</button>
+    </div> -->
+  </div>
+
+  <div class="modal-body">
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Updated By</th>
+            <th>Updated On</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of statuses">
+            <td>{{ item.status.name }}</td>
+            <td>{{ item.user.name }} </td>
+            <td>{{ item.created_at | date: 'medium' }} </td>
+           </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+<br />
+<div class="footer-block text-center" >
+  <button type="button" class="cancelBtn" data-dismiss="modal" mat-stroked-button color="warn" 
+  (click)="cancel()">Cancel</button>
+</div>

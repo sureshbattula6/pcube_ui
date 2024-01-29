@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-header text-center font-weight-bold">
+        <h1>ONLINE-PAYMENTS</h1>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="onlinepaymentForm" (ngSubmit)="onlineFormSubmit()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" formControlName="name" placeholder="Enter Name"
+                    [ngClass]="{ 'is-invalid': submitted && formvalidate.name.errors }" value="name">
+                <div *ngIf="submitted && formvalidate.name.errors" class="invalid-feedback">
+                    <div *ngIf="formvalidate.name.errors.pattern">It should Allow Alphabets Only</div>
+                    <div *ngIf="formvalidate.name.errors.required">The Required is Field Mandatory</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Phone Number</label>
+                <input type="text" name="phone" class="form-control" formControlName="phone"
+                    placeholder="Enter Phone Number" [ngClass]="{ 'is-invalid': submitted && formvalidate.phone.errors }">
+                <div *ngIf="submitted && formvalidate.phone.errors" class="invalid-feedback">
+                    <div *ngIf="formvalidate.phone.errors.pattern">It should Allow Numbers Only</div>
+                    <div *ngIf="formvalidate.phone.errors.required">The Required is Field Mandatory</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Price</label>
+                <input type="text" name="price" class="form-control" formControlName="price" placeholder="Enter Price Ex@..2500/-" 
+                [ngClass]="{ 'is-invalid': submitted && formvalidate.price.errors }">
+                <div *ngIf="submitted && formvalidate.price.errors" class="invalid-feedback">
+                    <div *ngIf="formvalidate.price.errors.pattern">It Should Allow Numbers Only </div>
+                    <div *ngIf="formvalidate.price.errors.required">The Required is Field Mandatory</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Item Code</label>
+                <input type="text" name="item_code" class="form-control" formControlName="item_code"
+                    placeholder="Enter item_code Ex@..SH-1001">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Order Id</label>
+                <input type="text" name="order_id" class="form-control" formControlName="order_id"
+                    placeholder="Enter order_id">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

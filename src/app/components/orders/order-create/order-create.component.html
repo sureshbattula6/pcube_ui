@@ -1,0 +1,255 @@
+<div class="az-content">
+    <div class="container">
+        <div class="az-content-body d-flex flex-column">
+            <div class="az-content-title">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1>Order Details</h1>
+                            </div>
+
+                            <div class="justify-content-end" >
+                                <button mat-raised-button (click)="generateSaleOrderCopyOnly()" color="primary">Sales Order Copy</button>
+                                <!-- <a mat-raised-button [href]="generatePdfLink()" target="_blank" color="primary">Sales Order Copy</a> -->
+                            </div>
+
+                            <div class="col-md-4">
+                                <button mat-raised-button *ngIf="balanceAmountChild <= 10 && orginalOrderStatus != 2" (click)="generateInvoice()" color="accent">Generate Order
+                                    Invoice</button>
+                                <button class="backButton" mat-raised-button (click)="goBack()"><i
+                                        class="typcn typcn-arrow-back"></i> Back</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- <h3>Customer Information</h3> -->
+                                <table class="table table-bordered">
+
+                                    <!-- <th>PERSONAL DETAILS:</th>
+                                        <br />
+                                        <th>ORDER DETAILS:</th> -->
+
+                                    <tbody>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <td>
+                                                <p>
+                                                  {{ customer?.name }}  / {{ customer?.phone }}
+                                                </p>
+                                                <p *appPermissions="['ORDER_CREATE']">
+                                                  <a [routerLink]="['/customer', customer?.id, 'overview']">More..</a>
+                                                </p>
+
+                                            </td>
+                                            <th>ORDER ID</th>
+                                            <td>
+                                                <p> PCO0{{ order?.id }} </p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Recent Payment Method</th>
+                                            <td [ngSwitch]="recentPayment?.payment_type">
+                                              <p *ngSwitchCase="1">CASH</p>
+                                              <p *ngSwitchCase="2">CARD</p>
+                                              <p *ngSwitchCase="3">CREDIT</p>
+                                              <p *ngSwitchCase="4">ONLINE</p>
+                                              <p *ngSwitchCase="5">UPI</p>
+                                          </td>
+                                          
+                                            <th>ORDER DATE</th>
+                                            <td><p>{{ order?.created_at | date: "dd-MM-yyyy ',' HH:mm a"}}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Quantity</th>
+                                            <td>
+                                                <p> {{ order?.orderitems?.length }} </p>
+                                            </td>
+                                                <th>ORDER STATUS</th>
+                                                <td [ngSwitch]="order?.order_status">
+                                                    <p *ngSwitchCase="0">Order Placed</p>
+                                                    <p *ngSwitchCase="1">Order Completed</p>
+                                                    <p *ngSwitchCase="2">Order Cancelled</p>
+                                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="table thead-light" *ngIf="orderItems.length > 0">
+                                    <tr>
+                                        <th style="width: 25%">Item</th>
+                                        <th style="width: 15%" ></th>
+                                        <th style="width: 25%">Capture Image</th>
+                                        <th style="width: 10%"></th>
+                                        <!-- <th style="width: 20%"></th>
+                                        <th style="width: 20%"></th> -->
+                                        <!-- <th class="text-right" style="width: 10%" >Discount</th>
+                                                <th class="text-right" style="width: 10%" >Subtotal</th> -->
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%;" *ngIf="measurementId">
+                                            <button type="button" color="primary"
+                                                [routerLink]="['/measurments', measurementId, orderId]"
+                                                mat-flat-button>Measurement</button>
+                                        </td>
+
+                                        <!-- <td style="width: 20%;" *ngIf="measurementId">
+                                            <button type="button" color="primary"
+                                                [routerLink]="['/updatemeasurement', measurementId]"
+                                                mat-flat-button>Updated Measurements</button>
+                                        </td> -->
+
+                                        <td *ngIf="!measurementId">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Select Measurements</mat-label>
+                                                <mat-select [formControl]="measurements"
+                                                    (selectionChange)="measurementUpdate($event)">
+                                                    <mat-option *ngFor="let measurement of measurementsList"
+                                                        [value]="measurement.value">{{measurement.viewValue}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                        <td *ngIf="!measurementId">
+                                            <button mat-raised-button (click)="gotoAddMeasurementPage()" color="primary">Add Measurement</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr *ngFor="let cart of orderItems;" style="width: 100%;">
+
+                                        <td style="width: 30%;">
+                                            <div class="productDetails">
+                                                <div class="productImg">
+                                                    <img *ngIf="cart?.product?.images !== null"
+                                                        src="{{SERVER_PATH}}/storage/{{cart?.product?.images}}" alt=""
+                                                        class="img" aria-hidden="false">
+                                                    <img *ngIf="cart?.product?.images == null" class="img"
+                                                        src="assets/images/blank-profile-picture.png" alt="" />
+                                                </div>
+
+                                                <div class="productDesc">
+                                                    <p>{{cart?.product?.name}}</p>
+                                                    <p> {{cart?.product?.item_type}}</p>
+                                                    <p>{{cart?.product?.item_description}}</p>
+                                                    <p>{{getLatestOrderStatus(cart?.orderitemstatus)}}</p>
+
+                                                </div>
+                                            </div>
+                                            <!-- <button type="button" color="primary" [routerLink]="['/measurments', cart?.measurements_id]" mat-flat-button>Measurement</button>
+                                                    <mat-form-field appearance="fill" style="width:30%">
+                                                      <mat-label>Select Tailor</mat-label>
+                                                      <mat-select [(value)]="cart.tailor_id" (selectionChange)="tailorUpdate($event, cart.id)" >
+                                                        <mat-option>NONE</mat-option>
+                                                        <mat-option *ngFor="let tailor of tailors;" [value]="tailor?.id">
+                                                              <span>{{tailor?.name}}</span>
+                                                          </mat-option>
+                                                      </mat-select>
+                                                    </mat-form-field>
+                                                    <button type="button" (click)="viewItemStausModal(cart.id)" color="primary" mat-flat-button>View Item Statuses</button> -->
+                                        </td>
+                                        <td>
+                                          <mat-form-field appearance="fill">
+                                            <mat-label> Sales Employee</mat-label>
+                                            <mat-select   (selectionChange)="updateOrderSalesEmployee(cart.id,$event)"
+                                            [value]="cart.sales_emp_id"
+                                            [disabled]="isSelectDisabled(cart.created_at) || !checkOrderCreatePermission"
+                                            >
+                                            <!-- <input placeholder="Search..." matInput type="text" (keyup)="onSearchEmpKey($event.target.value)" (click)="selectOptions(cart, 'salesemployee')" class="sales-emp-input"> -->
+                                                <mat-option value="-1">None</mat-option>
+                                                <mat-option *ngFor="let saleEmp of searchSelectedEmployees" [value]="saleEmp.id">
+                                                    <span>{{ saleEmp.name }} - {{saleEmp.employe_code}}</span>
+                                                </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+                                        </td>
+
+
+                                        <td style="width: 10%;" *ngIf="cart?.style_id">
+                                            <!-- <button type="button" (click)="measurementStyle(cart?.style_id)" color="primary" mat-flat-button>Style</button> -->
+                                            <button type="button" [routerLink]="['/style', cart?.style_id]"
+                                                color="primary" mat-flat-button>View Style</button>
+                                            <!-- <button type="button" color="primary" [routerLink]="['/measurments', cart?.measurements_id]" mat-flat-button>Measurement</button> -->
+                                        </td>
+
+                                        <td style="width: 10%;" *ngIf="!cart?.style_id">
+                                            <button class="mg-5" type="button" (click)="viewItemStausModal(cart.id)"
+                                                color="primary" mat-flat-button>View Item Status</button>
+                                        </td>
+
+                                        <td style="width: 10%;">
+                                            <button type="button" *ngIf="!cart?.style_id"
+                                                (click)="measurementStyle(cart.id, cart.order_id, cart.product.category_id)"
+                                                color="primary" mat-flat-button>Style </button>
+                                        </td>
+
+
+                                        <!--
+                                          Commenting Temporarily for Store Launch
+
+                                          <td style="width: 20%;">
+                                            <mat-form-field appearance="fill" *ngIf="cart.tailor_id">
+                                                <mat-label>Status</mat-label>
+                                                <mat-select [(value)]="cart.order_status"
+                                                    (selectionChange)="statusUpdate($event, cart.id)">
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let status of orderStatus;"
+                                                        [value]="status?.id">
+                                                        <span>{{status?.name}}</span>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <mat-form-field appearance="fill">
+                                                <mat-label>Select Store</mat-label>
+                                                <mat-select [disabled] ="selectedTailorIdsStatus[cart.id]"
+                                                [(ngModel)]="selectedTailorIds[cart.id]"
+                                                >
+
+                                                    <mat-option></mat-option>
+                                                    <mat-option *ngFor="let tailor of tailors;" [value]="tailor?.id">
+                                                        <span>{{tailor?.name}} {{ cart.tailor_id}}</span>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td> -->
+
+
+                                    </tr>
+                                    <!-- <tr>
+                                      <td colspan="5" align="right">
+                                        <button type="button" (click)="updateAllTailorStatuses()" color="primary" mat-raised-button>Submit</button>
+                                      </td>
+                                    </tr> -->
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <app-order-place (getBalanceAmountEvent)="setBalanceAmount($event)" [discountEnable]="true" (updateEvent)="ngOnInit()"></app-order-place>
+                    </div>
+
+                </div>
+                <!-- <div class="col-md-4">
+                    <a href="{{SERVER_PATH}}/pdf/orders/sales_order_copy_{{ order?.id }}.pdf">Generate Sales Order Pdf</a>
+                </div> -->
+                <!-- <div class="col-md-4">
+                    <a [href]="generatePdfLink()" class="btn btn-primary" target="_blank" role="button">Download Order Pdf</a>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='text-center'>
+    <button *ngIf="order.order_status == 0 && roleId == 0" mat-raised-button (click)="cancelorder(orderId)" color="warn">Cancel Order</button>
+</div>
+
+
+

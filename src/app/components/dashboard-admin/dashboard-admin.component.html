@@ -1,0 +1,254 @@
+<div class="az-content-header d-block d-md-flex">
+  <div>
+    <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Hi, welcome back!</h2>
+    <p class="mg-b-0">Your sales monitoring dashboard template.</p>
+  </div>
+  <div class="az-dashboard-header-right">
+    <div>
+        <label class="tx-13">Customers in store</label>
+       <a [routerLink]="['/customers']" ><h5 class="cursorPointer" (click)="scroll(customerTable)" >{{customersInStore}}</h5></a>
+    </div>
+    <div>
+      <label class="tx-13">Total Orders</label>
+      <a routerLink="/orders"><h5 >{{OrdersCount}}</h5></a>
+    </div>
+    <!-- <div>
+      <label class="tx-13">All Sales (Offline)</label>
+      <h5>932,210</h5>
+    </div> -->
+  </div><!-- az-dashboard-header-right -->
+</div><!-- az-content-header -->
+<div class="az-content-body">
+
+  <div class="card card-dashboard-seven">
+    <!-- <div class="card-header">
+      <div class="row row-sm">
+        <div class="col-6 col-md-4 col-xl">
+          <div class="media">
+            <div><i class="icon ion-ios-calendar"></i></div>
+            <div class="media-body">
+              <label>Start Date</label>
+              <div class="date">
+                <span>Sept 01, 2018</span> <a href="#" (click)="$event.preventDefault()"><i class="icon ion-md-arrow-dropdown"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl">
+          <div class="media">
+            <div><i class="icon ion-ios-calendar"></i></div>
+            <div class="media-body">
+              <label>End Date</label>
+              <div class="date">
+                <span>Sept 30, 2018</span> <a href="#" (click)="$event.preventDefault()"><i class="icon ion-md-arrow-dropdown"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl mg-t-15 mg-md-t-0">
+          <div class="media">
+            <div><i class="icon ion-logo-usd"></i></div>
+            <div class="media-body">
+              <label>Sales Measure</label>
+              <div class="date">
+                <span>Revenue</span> <a href="#" (click)="$event.preventDefault()"><i class="icon ion-md-arrow-dropdown"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl mg-t-15 mg-xl-t-0">
+          <div class="media">
+            <div><i class="icon ion-md-person"></i></div>
+            <div class="media-body">
+              <label>Customer Type</label>
+              <div class="date">
+                <span>All Customers</span> <a href="#" (click)="$event.preventDefault()"><i class="icon ion-md-arrow-dropdown"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-xl mg-t-15 mg-xl-t-0">
+          <div class="media">
+            <div><i class="icon ion-md-stats"></i></div>
+            <div class="media-body">
+              <label>Transaction Type</label>
+              <div class="date">
+                <span>All Transactions</span> <a href="#" (click)="$event.preventDefault()"><i class="icon ion-md-arrow-dropdown"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="card-body card-dashboard-seven">
+      <div class="row row-sm">
+        <div class="col">
+          <label class="az-content-label">Total Products</label>
+          <!-- <a [routerLink]="['/products']"></a> -->
+            <h2>{{ProductsCount}}</h2>
+        </div><!-- col -->
+        <div class="col">
+          <label class="az-content-label">Suits</label>
+          <h2>{{SuitsCount}}</h2>
+
+        </div><!-- col -->
+        <div class="col">
+          <label class="az-content-label">Shirts</label>
+          <h2>{{ShirtsCount}}</h2>
+
+        </div><!-- col -->
+        <div class="col">
+          <label class="az-content-label">Trousers</label>
+          <h2>{{trousersCount}}</h2>
+        </div><!-- col -->
+
+        <div class="col">
+          <label class="az-content-label">Top Outfits</label>
+          <h2>{{topOutfitCount}}</h2>
+        </div><!-- col -->
+
+      </div><!-- row -->
+    </div><!-- card-body -->
+  </div><!-- card -->
+
+  <div class="card card-dashboard-seven" style="background-color: rgba(0, 0, 0, 0.03);">
+    <div class="card-body">
+      <div class="row row-sm">
+        <div class="col">
+          <label class="az-content-label">Total Orders</label>
+            <h2>{{OrdersCount}}</h2>
+        </div><!-- col -->
+        <div class="col">
+          <label class="az-content-label">Placed</label>
+          <h2>{{orderPlacedCount}}</h2>
+
+        </div><!-- col -->
+        <div class="col">
+          <label class="az-content-label">Completed</label>
+          <h2>{{orderCompletedCount}}</h2>
+
+        </div><!-- col -->
+        <div class="col">
+          <label class="az-content-label">Cancelled</label>
+          <h2>{{orderCancelledCount}}</h2>
+        </div><!-- col -->
+
+      </div><!-- row -->
+    </div><!-- card-body -->
+  </div><!-- card -->
+
+  <div class="row row-sm mg-b-20 mg-lg-b-20">
+    <div class="col-md-6 col-xl-7">
+      <div class="card card-table-two">
+        <h6 class="card-title">Latest Orders</h6>
+        <span class="d-block mg-b-20">This is your most recent orders.</span>
+        <div class="table-responsive">
+          <table class="table table-striped table-dashboard-two">
+            <thead>
+              <tr>
+
+                <th class="wd-lg-25p ">Order Id</th>
+                <th class="wd-lg-25p ">Customer Name</th>
+                <th class="wd-lg-25p tx-right">Status</th>
+                <th class="wd-lg-25p tx-right">Date</th>
+                <!-- <th class="wd-lg-25p tx-right">Tax Witheld</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of latestOrders">
+
+              <a [routerLink]="['/order-view', order.id]"><td class=" tx-medium tx-inverse">PCO0{{order?.id}}</td></a>
+                <td clas="tx-medium tx-inverse">{{order?.customer?.name}}</td>
+                <td class="tx-right tx-medium tx-inverse" [ngSwitch]="order?.order_status">
+                  <!-- {{(order?.order_status === '1') ? 'Progress' : 'Order Placed'}} -->
+                  <span *ngSwitchCase="0">Order Placed</span>
+                  <span *ngSwitchCase="1">Order Completed</span>
+                  <span *ngSwitchCase="2">Order Cancelled</span>
+                </td>
+                <td class="tx-right tx-medium tx-inverse">{{order?.created_at | date: "MMM dd, yyyy ',' hh:mm a"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- table-responsive -->
+      </div><!-- card-dashboard-five -->
+    </div>
+    <div class="col-md-6 col-xl-5 mg-t-20 mg-md-t-0">
+      <div class="card card-dashboard-eight">
+        <h6 class="card-title">Top Stores</h6>
+        <span class="d-block mg-b-20">Sales performance revenue based by Store</span>
+
+        <div class="list-group">
+          <div class="list-group-item">
+            <!-- <i class="flag-icon flag-icon-us flag-icon-squared"></i> -->
+            <p>Ameerpet</p>
+            <span>8</span>
+          </div><!-- list-group-item -->
+          <div class="list-group-item">
+            <!-- <i class="flag-icon flag-icon-nl flag-icon-squared"></i> -->
+            <p>Gachibowli</p>
+            <span>7</span>
+          </div><!-- list-group-item -->
+          <div class="list-group-item">
+            <!-- <i class="flag-icon flag-icon-gb flag-icon-squared"></i> -->
+            <p>Hitech City</p>
+            <span>5</span>
+          </div><!-- list-group-item -->
+          <div class="list-group-item">
+            <!-- <i class="flag-icon flag-icon-ca flag-icon-squared"></i> -->
+            <p>Secundrabad</p>
+            <span>4</span>
+          </div><!-- list-group-item -->
+          <div class="list-group-item">
+            <!-- <i class="flag-icon flag-icon-au flag-icon-squared"></i> -->
+            <p>LB Nagar</p>
+            <span>3</span>
+          </div><!-- list-group-item -->
+        </div><!-- list-group -->
+      </div><!-- card -->
+    </div><!-- col -->
+  </div><!-- row -->
+
+  <div class="row row-sm mg-b-20 mg-lg-b-0" #customerTable>
+      <div class="col-md-12 col-xl-12">
+        <div class="card card-table-two">
+          <h6 class="card-title">Customers</h6>
+          <div class="table-responsive mg-t-20">
+            <table class="table table-striped table-dashboard-two">
+              <thead>
+                <tr>
+                  <th class="wd-lg-25p">Image</th>
+                  <th class="wd-lg-25p tx-right">Customer Name</th>
+                  <th class="wd-lg-25p tx-right">Mobile Number</th>
+                  <th class="wd-lg-25p tx-right">Last Product Purchased</th>
+                  <th class="wd-lg-25p tx-right">Age</th>
+                  <th class="wd-lg-25p tx-right">Gender</th>
+                  <th class="wd-lg-25p tx-right">Lifestyle</th>
+                  <th class="wd-lg-25p tx-right">Emotion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="cursorPointer" *ngFor="let visit of visits;let i=index;" [routerLink]="['/customer',visit?.id]">
+                    <td>
+                      <!-- <img class="az-img-user" src="assets/images/{{visit?.image}}" alt=""> -->
+                      <img class="az-img-user" *ngIf="visit?.images != null" src="{{SERVER_PATH}}/storage/{{visit?.images}}" alt="">
+                      <img class="az-img-user" *ngIf="visit?.images == null" src="assets/images/blank-profile-picture.png" alt="">
+                    </td>
+                    <td class="tx-right tx-medium">
+                      {{ visit?.name}}
+                    </td>
+                    <td class="tx-right tx-medium">{{ visit?.phone}}</td>
+                    <td class="tx-right tx-medium">{{ visit?.brand_purchased}}</td>
+                    <td class="tx-right tx-medium">{{ visit?.age}}</td>
+                    <td class="tx-right tx-medium">{{ visit?.gender}}</td>
+                    <td class="tx-right tx-medium">{{ visit?.life_style}}</td>
+                    <td class="tx-right tx-medium">{{ visit?.emotion}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div><!-- table-responsive -->
+        </div><!-- card-dashboard-five -->
+      </div>
+
+    </div><!-- row -->
+</div><!-- az-content-body -->

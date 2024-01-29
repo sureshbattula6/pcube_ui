@@ -1,0 +1,59 @@
+<div class="az-content-header d-block d-md-flex">
+    <div>
+        <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Hi, welcome back!</h2>
+        <p class="mg-b-0">Your sales monitoring dashboard template.</p>
+    </div>
+</div><!-- az-content-header -->
+<div class="az-content-body">
+
+    <div class="card card-dashboard-seven">
+
+        <div class="card-body">
+            <div class="row row-sm">
+                <div class="col-6 col-lg-3">
+                    <label class="az-content-label">Total Orders</label>
+                    <a [routerLink]="['/tailor-orders']"><h2>{{tailorOrderCount}}</h2></a>
+                </div><!-- col -->
+
+                <div class="col-6 col-lg-3">
+                  <label class="az-content-label">Total Items</label>
+                  <h2>{{tailorTotalItemsCount}}</h2>
+
+                </div><!-- col -->
+
+            </div><!-- row -->
+        </div><!-- card-body -->
+    </div><!-- card -->
+
+    <div class="row row-sm mg-b-20 mg-lg-b-0">
+        <div class="col-md-12 col-xl-12">
+            <div class="card card-table-two">
+                <h6 class="card-title">LATEST Orders</h6>
+                <span class="d-block mg-b-20">This is your most recent earnings for today's date.</span>
+                <div class="table-responsive">
+                    <table class="table table-striped table-dashboard-two">
+                        <thead>
+                            <tr>
+                                <th class="wd-lg-25p ">Order Id</th>
+                                <th class="wd-lg-25p ">customer Name</th>
+                                <th class="wd-lg-25p ">Item Name</th>
+                                <th class="wd-lg-25p ">Recent Status</th>
+                                <!-- <th class="wd-lg-25p tx-right">Tax Witheld</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let orders of latestorders">
+                                  <td class=" tx-medium tx-inverse"><a [routerLink]="['/tailor-order-view', orders?.order_id]">PCUBE0{{orders?.order_id}}</a></td>
+                                  <td class=" tx-medium tx-inverse">{{orders?.order?.customer?.name}}</td>
+                                  <td class="tx-left tx-medium tx-inverse">{{orders?.product?.name}}</td>
+                                  <td class="tx-left tx-medium tx-inverse">{{orders?.latestorderitemstatus?.status?.name}} </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div><!-- table-responsive -->
+            </div><!-- card-dashboard-five -->
+        </div>
+    </div><!-- row -->
+
+
+</div><!-- az-content-body -->

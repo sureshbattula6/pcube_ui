@@ -1,0 +1,49 @@
+.az-content-title {
+    font-size: 14px;
+}
+app-cart-item {
+    display: contents;
+}
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+th{
+    background: #eeeeee;
+}
+td{
+    color: #7987a1 !important;
+}
+
+.checkout{
+    background: #eeeeee;
+    padding: 1rem;
+}
+
+.checkout h2{
+    margin-bottom: 0px;
+}
+
+.checkout p {
+    margin-top: 14px;
+    margin-bottom: 0px;
+}
+
+.mat-dialog-container{
+    overflow: hidden;
+}
+
+table.carttable td,table.carttable th,.table td {
+  padding: 0;
+}
+.form-control {
+  font-size: 14px;
+}
+.cartrowheading {
+  font-size: 11px;
+    font-weight: 700;
+    color: #7987a1;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding:0;
+}

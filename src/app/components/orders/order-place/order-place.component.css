@@ -1,0 +1,22 @@
+.order-details{
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.discountBox{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.discountBox .icon {
+    width: 10%;
+    cursor: pointer;
+}
+
+.discountBox .input{
+    width: 90%;
+}

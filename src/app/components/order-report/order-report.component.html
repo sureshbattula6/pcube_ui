@@ -1,0 +1,50 @@
+<div class="az-content">
+  <div class="container">
+      <div class="az-content-body d-flex flex-column">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="customFilter">Status Filter:</label>
+            <select class="form-control" id="customFilter" [(ngModel)]="orderStatusSelectedFilter" (change)="onOrderStatusFilterChange()">
+              <option *ngFor="let option of orderStatusFilterOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="timelineFilter">Timeline Filter:</label>
+              <select class="form-control" id="timelineFilter" [(ngModel)]="selectedTimelineFilter" (change)="onTimelineFilterChange()">
+                <option *ngFor="let option of timelineFilterOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+          </div>
+          <div class="col-md-3" *ngIf="selectedTimelineFilter === 'custom'">
+            <label for="startDate">Start Date:</label>
+            <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" (input)="onDateChange()">
+          </div>
+          <div class="col-md-3" *ngIf="selectedTimelineFilter === 'custom'">
+            <label for="endDate">End Date:</label>
+            <input type="date" class="form-control" id="endDate" (input)="onDateChange()" [(ngModel)]="endDate">
+          </div>
+        </div>
+        <br />
+        <table id="dataTable" datatable [dtOptions]="dtOptions" class="row-border hover">
+
+          <tfoot>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
+
+        </table>
+      </div>
+  </div>
+</div>

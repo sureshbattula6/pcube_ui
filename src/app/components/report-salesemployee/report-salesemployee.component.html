@@ -1,0 +1,39 @@
+<div class="az-content">
+  <div class="container">
+      <div class="az-content-body d-flex flex-column">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="timelineFilter">Select Sales Employee:</label>
+            <mat-form-field appearance="fill" *ngIf="salesEmployeeList.length">
+              <mat-label> Sales Employee</mat-label>
+              <mat-select  [(ngModel)]="selectedEmployee" (selectionChange)="onSalesEmployee()">
+              <input placeholder="Search..." matInput type="text" (keyup)="onSearchEmpKey($event.target.value)" class="sales-emp-input">
+                  <mat-option value="-1">All</mat-option>
+                  <mat-option *ngFor="let saleEmp of searchSelectedEmployees" [value]="saleEmp.id">
+                      <span>{{ saleEmp.name }} - {{saleEmp.employe_code}}</span>
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <label for="timelineFilter">Timeline Filter:</label>
+              <select class="form-control" id="timelineFilter" [(ngModel)]="selectedTimelineFilter" (change)="onTimelineFilterChange()">
+                <option *ngFor="let option of timelineFilterOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+          </div>
+          <div class="col-md-3" *ngIf="selectedTimelineFilter === 'custom'">
+            <label for="startDate">Start Date:</label>
+            <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" (input)="onDateChange()">
+          </div>
+          <div class="col-md-3" *ngIf="selectedTimelineFilter === 'custom'">
+            <label for="endDate">End Date:</label>
+            <input type="date" class="form-control" id="endDate" (input)="onDateChange()" [(ngModel)]="endDate">
+          </div>
+        </div>
+        <br />
+        <table id="dataTable" datatable [dtOptions]="dtOptions" class="row-border hover">
+        </table>
+      </div>
+  </div>
+</div>
+
