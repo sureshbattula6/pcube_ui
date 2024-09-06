@@ -91,7 +91,6 @@ export class UpdatemeasurementComponent implements OnInit {
     private location: Location
     ) { }
 
-
   ngOnInit(): void {
     this.measurementId = this.route.snapshot.paramMap.get('id');
     // alert(this.cartId);
