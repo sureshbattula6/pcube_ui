@@ -186,7 +186,7 @@ export class OrderProductsComponent implements OnInit {
   }
 
   cartProductsList() {
-    // console.log(this.cartProducts)
+    // console.log('Products.....',this.cartProducts)
     this.cartProducts.forEach((element : any) => {
       this.addProductToCart(element.product, element.qty);
     });

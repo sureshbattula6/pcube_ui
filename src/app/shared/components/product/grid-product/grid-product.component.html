@@ -1,26 +1,21 @@
-<!-- <div class="col-lg-4"> -->
-    <div class="product">
-        <div class="title">
-            <img *ngIf="product?.images !== null" src="{{SERVER_PATH}}/storage/{{product?.images}}" alt=""  style="height:350px">
-            <img *ngIf="product?.images == null" style="height:250px" src="assets/images/blank-profile-picture.png" alt="" />
-        </div>
-        <div class="body">
-                <p class="productName"> {{product?.name}} </p>
-                <p class="productDesc"> {{product?.item_description}} </p>
-                <p> INR {{product?.price}} </p>
-                <p>
-                  <mat-form-field class="counter">
-                    <button mat-button mat-icon-button matPrefix    (click)="decrement()" ><mat-icon>remove</mat-icon></button>
-                    <input matInput type="number" [(ngModel)]="qty" class="test" (keyup)="cartQty()"  />
-                    <button  mat-button mat-icon-button matSuffix (click)="increment()"   ><mat-icon>add</mat-icon> </button>
-                </mat-form-field>
-              </p>
-        </div>
-        <!-- <div class="footer">
-                <button class="btn btn-success btn-with-icon btn-block" (click)="addProductToCart(product?.id)">
-                        <i class="typcn typcn-shopping-cart"></i> add</button>
-        </div> -->
-
+<div class="product">
+    <div class="title">
+        <img *ngIf="product?.images !== null" src="{{SERVER_PATH}}/storage/{{product?.images}}" alt=""
+            style="height:350px">
+        <img *ngIf="product?.images == null" style="height:250px" src="assets/images/blank-profile-picture.png"
+            alt="" />
     </div>
-<!-- </div> -->
+    <div class="body">
+        <p class="productName"> {{product?.name}} </p>
+        <p class="productDesc"> {{product?.item_description}} </p>
+        <p> INR {{product?.price}} </p>
+        <p>
+            <mat-form-field class="counter">
+                <button mat-button mat-icon-button matPrefix (click)="decrement()"><mat-icon>remove</mat-icon></button>
+                <input matInput type="number" [(ngModel)]="qty" class="test" (keyup)="cartQty()" />
+                <button mat-button mat-icon-button matSuffix (click)="increment()"><mat-icon>add</mat-icon> </button>
+            </mat-form-field>
+        </p>
+    </div>
 
+</div>

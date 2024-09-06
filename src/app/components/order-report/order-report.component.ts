@@ -148,7 +148,7 @@ export class OrderReportComponent implements OnInit {
               return '0.00';
             else {
             let balance =
-              row.order_amount - row.total_paid_amount - row.order_discount;
+              row.order_amount - row.total_paid_amount;
             if (balance < 0) balance = 0;
             return balance.toFixed(2);
             }
@@ -240,6 +240,50 @@ export class OrderReportComponent implements OnInit {
             });
             return formattedDate;
           },
+        },
+        {
+          title: 'PAYMENT METHODS',
+          data: 'payment_methods',
+          orderable: false,
+        },
+        {
+          title: 'INVOICE NO',
+          data: 'invoice_number',
+          orderable: false,
+          render: function (data: any, type: any, row: any, meta: any) {
+            if (data) {
+              var invoiceId = 'PCI0' + data;
+              return `<a href="./order-view/${row.order_id}">${invoiceId}</a>`;
+            } else {
+              return '--';
+            }
+          },
+        },
+        {
+          title: 'INVOICE DATE',
+          data: 'invoice_date',
+          orderable: false,
+          render: function (data: any, type: any, row: any, meta: any) {
+            if (!data) return '--';
+
+            const dateObject = new Date(data);
+            const formattedDate = dateObject.toLocaleString('en-GB', {
+              day: 'numeric',
+              month: 'numeric',
+              year: 'numeric'
+            });
+            return formattedDate;
+          },
+        },
+        {
+          title: 'REMARKS',
+          data: 'remarks',
+          orderable: false,
+        },
+        {
+          title: 'F.CLOSED REMARKS',
+          data: 'force_completed_reason',
+          orderable: false,
         },
       ],
       order: [],

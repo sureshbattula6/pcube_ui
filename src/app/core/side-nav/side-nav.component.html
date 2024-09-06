@@ -26,6 +26,7 @@
           <i class="typcn typcn-clipboard"></i>Dashboard
         </a>
       </li>
+      
       <li class="nav-item" [ngClass]="{ active: customers.isActive }"
         *appPermissions="[MENU_PERMISSIONS?.CUSTOMER_MENUS]">
         <a routerLink="/customers" routerLinkActive="active" #customers="routerLinkActive" class="nav-link">

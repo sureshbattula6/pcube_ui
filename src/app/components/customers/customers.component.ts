@@ -42,7 +42,7 @@ export class CustomersComponent implements OnInit {
   public items_per_page:number = ITEMS_PER_PAGE;
 
   public current_page:number = CURRENT_PAGE;
-
+  public pageIndex:number = 0;
   roles: User[];
   dataSource = new MatTableDataSource<User>();
   public filter:FormControl = new FormControl("",Validators.required)
@@ -136,6 +136,8 @@ export class CustomersComponent implements OnInit {
   }
 
   advancedFilter(){
+    this.current_page = 0;
+    this.pageIndex = 0;
     this.getData(this.current_page, this.items_per_page);
   }
 
@@ -149,7 +151,7 @@ export class CustomersComponent implements OnInit {
     this.customerService.getCustomers(params)
     .subscribe((response: any) =>{
       this.dataSource = new MatTableDataSource<any>(response.data);
-          this.dataSource.paginator = this.paginator;
+          // this.dataSource.paginator = this.paginator;
       this.page_length = response.total;
     })
   }
@@ -157,6 +159,7 @@ export class CustomersComponent implements OnInit {
   pageChanged(event: PageEvent) {
     this.page_length = event.pageSize;
     this.current_page = event.pageIndex + 1;
+    this.pageIndex = event.pageIndex;
     this.getData(this.current_page, this.page_length);
   }
 

@@ -56,5 +56,4 @@ export class SideNavComponent implements OnInit {
       });
     });
   }
-
 }

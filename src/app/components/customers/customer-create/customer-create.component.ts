@@ -9,6 +9,7 @@ import { Role } from '../../../shared/models/Role';
 import { CustomerService } from '../../../services/customer.service';
 import { Router } from '@angular/router';
 import { Map } from 'mapbox-gl';
+import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class CustomerCreateComponent implements OnInit {
     private fb:FormBuilder,
     private router: Router,
     private rolesService:RolesService,
+    private authenticationService : AuthenticationService,
     private customerService:CustomerService) {
      this.customerId = data.id;
     }
@@ -47,9 +49,9 @@ export class CustomerCreateComponent implements OnInit {
     this.createcustomerForm();
     this.getCustomerData();
   }
-  
- 
-  
+
+
+
   getCustomerData():void{
 
     if(this.customerId == undefined){
@@ -104,10 +106,13 @@ export class CustomerCreateComponent implements OnInit {
       name: ['',[Validators.required]],
       // email: ['', [Validators.required,Validators.email]],
       email: [''],
-      phone: ['',[Validators.required],
-                   
+      // phone: ['',[Validators.required],
+      phone: ['', [
+        Validators.required,
+        Validators.pattern('^[0-9]{10}$') // This pattern ensures exactly 10 digits
+      ],
     ],
-      
+
       code:  [''],
       profession:  [''],
       alternate_phone:  [''],
@@ -140,7 +145,7 @@ export class CustomerCreateComponent implements OnInit {
   //   return this.customerService.storeCustomer(control.value).pipe((res: any) => {
   //     return res.isUnique ? null : { phoneExists: true };
   //   })
-  // } 
+  // }
 
   get formValidate(){
     return this.customerForm.controls;
@@ -160,11 +165,16 @@ export class CustomerCreateComponent implements OnInit {
       this.customerService.storeCustomer(this.customerForm.value).subscribe(
         (response)=>{
           this.cancel();
+
+          const customerId = response.data.id;
+
+          this.authenticationService.setCustomerId(customerId);
+
             this.customerForm.reset();
             this.myForm.resetForm();
             this.commonService.openAlert(response.message);
             this.createcustomerForm();
-            this.router.navigate(['/order-products']);
+            this.router.navigate(['/order-products'] ,customerId);
 
         },
         (err)=>{
@@ -180,7 +190,7 @@ export class CustomerCreateComponent implements OnInit {
                             serverError: 'Phone number is already exists.'
 
                           })
-                    }                    
+                    }
                     formControl.setErrors({
                       serverError: validatonErrors[prop]
                     });
@@ -219,5 +229,5 @@ export class CustomerCreateComponent implements OnInit {
   cancel():void{
     this.dialog.closeAll();
   }
- 
+
 }
